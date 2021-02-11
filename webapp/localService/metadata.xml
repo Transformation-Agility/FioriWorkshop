@@ -1,0 +1,121 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:Reference
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZWS_CO_WORKLOADS_CDS" xml:lang="en" sap:schema-version="1">
+            <EntityType Name="ZWS_CO_PROCESSESType" sap:label="CDS Consumption view for processes" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="work_proc_id"/>
+                    <PropertyRef Name="work_load_id"/>
+                </Key>
+                <Property Name="work_proc_id" Type="Edm.String" Nullable="false" MaxLength="32" sap:display-format="UpperCase"/>
+                <Property Name="work_load_id" Type="Edm.String" Nullable="false" MaxLength="32" sap:display-format="UpperCase"/>
+                <Property Name="no_proc_workpack" Type="Edm.Int32" sap:label="Number" sap:quickinfo="Number processed work packages"/>
+                <Property Name="state" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Status" sap:quickinfo="Work process state"/>
+                <Property Name="starttime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Start time" sap:quickinfo="Work process starttime"/>
+                <Property Name="endtime" Type="Edm.DateTimeOffset" Precision="7" sap:label="End time" sap:quickinfo="Work process endtime"/>
+            </EntityType>
+            <EntityType Name="ZWS_CO_WORKLOADSType" sap:label="CDS Consumption view for workloads" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="work_load_id"/>
+                </Key>
+                <Property Name="work_load_id" Type="Edm.String" Nullable="false" MaxLength="32" sap:display-format="UpperCase"/>
+                <Property Name="description" Type="Edm.String" MaxLength="100" sap:label="Description"/>
+                <Property Name="no_work_packs" Type="Edm.Int32"/>
+                <Property Name="completed" Type="Edm.Int32"/>
+                <Property Name="failed" Type="Edm.Int32"/>
+                <Property Name="in_process" Type="Edm.Int32"/>
+                <Property Name="unprocessed" Type="Edm.Int32"/>
+                <NavigationProperty Name="to_Packs" Relationship="ZWS_CO_WORKLOADS_CDS.assoc_4D7FF08125FDADA0F4B5173418EE3912" FromRole="FromRole_assoc_4D7FF08125FDADA0F4B5173418EE3912" ToRole="ToRole_assoc_4D7FF08125FDADA0F4B5173418EE3912"/>
+                <NavigationProperty Name="to_Procs" Relationship="ZWS_CO_WORKLOADS_CDS.assoc_F90E9C9E931C69BE1C55B3918C0F73FD" FromRole="FromRole_assoc_F90E9C9E931C69BE1C55B3918C0F73FD" ToRole="ToRole_assoc_F90E9C9E931C69BE1C55B3918C0F73FD"/>
+            </EntityType>
+            <EntityType Name="ZWS_CO_WORKPACKSType" sap:label="CDS Consumption view for workpackages" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="work_pack_id"/>
+                </Key>
+                <Property Name="work_pack_id" Type="Edm.String" Nullable="false" MaxLength="32" sap:display-format="UpperCase"/>
+                <Property Name="work_load_id" Type="Edm.String" MaxLength="32" sap:display-format="UpperCase" sap:value-list="standard"/>
+                <Property Name="classname" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Type" sap:quickinfo="Work package classname"/>
+                <Property Name="state" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Status" sap:quickinfo="Work package state"/>
+                <Property Name="starttime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Start time" sap:quickinfo="Work package starttime"/>
+                <Property Name="endtime" Type="Edm.DateTimeOffset" Precision="7" sap:label="End time" sap:quickinfo="Work package endtime"/>
+                <Property Name="modified_at" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed" sap:quickinfo="Work modified at"/>
+                <Property Name="description" Type="Edm.String" MaxLength="100" sap:label="Description"/>
+                <NavigationProperty Name="to_Wloads" Relationship="ZWS_CO_WORKLOADS_CDS.assoc_D2A7410D6D62AEE7CEBCF4AB8603DBC6" FromRole="FromRole_assoc_D2A7410D6D62AEE7CEBCF4AB8603DBC6" ToRole="ToRole_assoc_D2A7410D6D62AEE7CEBCF4AB8603DBC6"/>
+            </EntityType>
+            <Association Name="assoc_D2A7410D6D62AEE7CEBCF4AB8603DBC6" sap:content-version="1">
+                <End Type="ZWS_CO_WORKLOADS_CDS.ZWS_CO_WORKPACKSType" Multiplicity="1" Role="FromRole_assoc_D2A7410D6D62AEE7CEBCF4AB8603DBC6"/>
+                <End Type="ZWS_CO_WORKLOADS_CDS.ZWS_CO_WORKLOADSType" Multiplicity="1" Role="ToRole_assoc_D2A7410D6D62AEE7CEBCF4AB8603DBC6"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_D2A7410D6D62AEE7CEBCF4AB8603DBC6">
+                        <PropertyRef Name="work_load_id"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_D2A7410D6D62AEE7CEBCF4AB8603DBC6">
+                        <PropertyRef Name="work_load_id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_F90E9C9E931C69BE1C55B3918C0F73FD" sap:content-version="1">
+                <End Type="ZWS_CO_WORKLOADS_CDS.ZWS_CO_WORKLOADSType" Multiplicity="1" Role="FromRole_assoc_F90E9C9E931C69BE1C55B3918C0F73FD"/>
+                <End Type="ZWS_CO_WORKLOADS_CDS.ZWS_CO_PROCESSESType" Multiplicity="*" Role="ToRole_assoc_F90E9C9E931C69BE1C55B3918C0F73FD"/>
+            </Association>
+            <Association Name="assoc_4D7FF08125FDADA0F4B5173418EE3912" sap:content-version="1">
+                <End Type="ZWS_CO_WORKLOADS_CDS.ZWS_CO_WORKLOADSType" Multiplicity="1" Role="FromRole_assoc_4D7FF08125FDADA0F4B5173418EE3912"/>
+                <End Type="ZWS_CO_WORKLOADS_CDS.ZWS_CO_WORKPACKSType" Multiplicity="*" Role="ToRole_assoc_4D7FF08125FDADA0F4B5173418EE3912"/>
+            </Association>
+            <EntityContainer Name="ZWS_CO_WORKLOADS_CDS_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZWS_CO_PROCESSES" EntityType="ZWS_CO_WORKLOADS_CDS.ZWS_CO_PROCESSESType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZWS_CO_WORKLOADS" EntityType="ZWS_CO_WORKLOADS_CDS.ZWS_CO_WORKLOADSType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZWS_CO_WORKPACKS" EntityType="ZWS_CO_WORKLOADS_CDS.ZWS_CO_WORKPACKSType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_4D7FF08125FDADA0F4B5173418EE3912" Association="ZWS_CO_WORKLOADS_CDS.assoc_4D7FF08125FDADA0F4B5173418EE3912" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZWS_CO_WORKLOADS" Role="FromRole_assoc_4D7FF08125FDADA0F4B5173418EE3912"/>
+                    <End EntitySet="ZWS_CO_WORKPACKS" Role="ToRole_assoc_4D7FF08125FDADA0F4B5173418EE3912"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_F90E9C9E931C69BE1C55B3918C0F73FD" Association="ZWS_CO_WORKLOADS_CDS.assoc_F90E9C9E931C69BE1C55B3918C0F73FD" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZWS_CO_WORKLOADS" Role="FromRole_assoc_F90E9C9E931C69BE1C55B3918C0F73FD"/>
+                    <End EntitySet="ZWS_CO_PROCESSES" Role="ToRole_assoc_F90E9C9E931C69BE1C55B3918C0F73FD"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_D2A7410D6D62AEE7CEBCF4AB8603DBC6" Association="ZWS_CO_WORKLOADS_CDS.assoc_D2A7410D6D62AEE7CEBCF4AB8603DBC6" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZWS_CO_WORKPACKS" Role="FromRole_assoc_D2A7410D6D62AEE7CEBCF4AB8603DBC6"/>
+                    <End EntitySet="ZWS_CO_WORKLOADS" Role="ToRole_assoc_D2A7410D6D62AEE7CEBCF4AB8603DBC6"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotations
+                xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZWS_CO_WORKLOADS_CDS.ZWS_CO_WORKPACKSType/work_load_id">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="CDS Consumption view for workloads"/>
+                        <PropertyValue Property="CollectionPath" String="ZWS_CO_WORKLOADS"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="work_load_id"/>
+                                    <PropertyValue Property="ValueListProperty" String="work_load_id"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZWS_CO_WORKLOADS_CDS/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZWS_CO_WORKLOADS_CDS/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

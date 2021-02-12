@@ -23,6 +23,13 @@
 					"localUri": "localService/metadata.xml"
 				}
 			},
+			"ZAC_WS_TEST_SRV": {
+				"uri": "/sap/opu/odata/sap/ZAC_WS_TEST_SRV/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/metadata.xml"
+				}
+			},
 			"ZWS_CO_WORKLOADS_CDS_VAN": {
 				"uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZWS_CO_WORKLOADS_CDS_VAN',Version='0001')/$value/",
 				"type": "ODataAnnotation",
@@ -104,10 +111,31 @@
 					"defaultCountMode": "Inline",
 					"refreshAfterChange": false
 				}
+			},
+			"Comment": {
+				"dataSource": "ZAC_WS_TEST_SRV",
+				"settings": {
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "Inline",
+					"refreshAfterChange": false
+				}
 			}
 		},
 		"extends": {
-			"extensions": {}
+			"extensions": {
+				"sap.ui.viewExtensions": {
+					"sap.suite.ui.generic.template.ObjectPage.view.Details": {
+						"AfterFacet|ZWS_CO_WORKPACKS|work_pack_id": {
+							"type": "XML",
+							"className": "sap.ui.core.mvc.View",
+							"viewName": "ZWS_DEMO.ext.view.Comment",
+							"sap.ui.generic.app": {
+								"title": "{@i18n>Comment}"
+							}
+						}
+					}
+				}
+			}
 		},
 		"contentDensities": {
 			"compact": true,

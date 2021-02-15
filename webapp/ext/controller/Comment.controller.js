@@ -1,17 +1,18 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/m/DisplayListItem"
-], function(Controller, DisplayListItem) {
+	"sap/m/DisplayListItem",
+	"sap/m/MessageToast"
+], function(Controller, DisplayListItem, MessageToast) {
 	"use strict";
 
 	return Controller.extend("ZWS_DEMO.ext.controller.Comment", {
-		
+
 		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			var href = window.location.href;
 			var tab = href.split('to_Packs(\'');
-			var tab2 = tab[1].substring(0,32);//.split('\')');
-			this.sWorkPackId = tab2;//[0];
+			var tab2 = tab[1].substring(0, 32); //.split('\')');
+			this.sWorkPackId = tab2; //[0];
 			this._loadComments(this.sWorkPackId);
 			oRouter.getRoute("ZWS_CO_WORKLOADS/to_Packs").attachMatched(this._onRouteMatched, this);
 		},
@@ -19,8 +20,8 @@ sap.ui.define([
 		_onRouteMatched: function(oEvent) {
 			var href = window.location.href;
 			var tab = href.split('to_Packs(\'');
-			var tab2 = tab[1].substring(0,32);//.split('\')');
-			this.sWorkPackId = tab2;//[0];
+			var tab2 = tab[1].substring(0, 32); //.split('\')');
+			this.sWorkPackId = tab2; //[0];
 
 			this._loadComments(this.sWorkPackId);
 		},
@@ -57,33 +58,40 @@ sap.ui.define([
 			//var sWorkPackId = this.getView().byId("inputWorkPack").getValue();
 			var oModel = this.getOwnerComponent().getModel("Comment");
 			var aList = this.getView().byId("listComment").getItems();
+			var oBundle = this.getView().getModel("i18n").getResourceBundle();
 
 			if (!this.sWorkPackId) {
-				//popup
+				var msg = "Please fill Workpack field!";
+				MessageToast.show(msg);
 			} else {
 				sap.ui.core.BusyIndicator.show();
-				oModel.remove("/CommentSet(WorkPackId='" + this.sWorkPackId + "',CommentNo=1)", {
+				oModel.remove("/CommentFMSet(WorkPackId='" + this.sWorkPackId + "',CommentNo=1)", {
 					method: "DELETE",
 					success: function(data) {
-						var oEntry;
-
+					    var oEntry;
+						var mParameters = {batchGroupId:"batchGroup"};
+						
+						oModel.setDeferredGroups(["batchGroup"]);
 						for (var i in aList) {
 							oEntry = {};
+						    mParameters = {batchGroupId:"batchGroup", changeSetId:"change " + i};
 							oEntry.WorkPackId = this.sWorkPackId;
 							oEntry.CommentNo = parseInt(i) + 1;
 							oEntry.CommentTxt = aList[i].getProperty("label");
 
 							//oModel.setHeaders({"content-type" : "application/json;charset=utf-8"});
-							oModel.create('/CommentSet', oEntry, null, function() {
-								//alert("Create successful");
-							}, function() {
-								//alert("Create failed");
-							});
+							oModel.create('/CommentFMSet', oEntry, mParameters);
 						}
+						mParameters = {batchGroupId:"batchGroup"};
+						oModel.submitChanges(mParameters);
+						
+						MessageToast.show(oBundle.getText("commentAdded"));
+						sap.ui.core.BusyIndicator.hide();
 					}.bind(this),
 					error: function(e) {
-
-					}
+						MessageToast.show(oBundle.getText("commentDeleteError"));
+						sap.ui.core.BusyIndicator.hide();
+					}.bind(this)
 				});
 
 			}
@@ -103,7 +111,7 @@ sap.ui.define([
 
 			oListComment.removeAllItems();
 
-			oModel.read("/CommentSet", {
+			oModel.read("/CommentFMSet", {
 				urlParameters: {
 					"$filter": sFilter
 				},

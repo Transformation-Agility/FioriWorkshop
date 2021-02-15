@@ -1,6 +1,24 @@
 {
   "run": [
     {
+      "filePath": "/webapp/Component.js",
+      "previewMode": 1,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": null,
+      "ui5VerSource": null,
+      "isDefaultVersion": 0,
+      "urlParameters": [],
+      "hashParameter": "",
+      "backendSystem": [],
+      "_metadata": {
+        "runnerId": "fiorirunner",
+        "id": 8964521,
+        "displayName": "Run Component.js",
+        "lastRunTimeStamp": 1613388842964
+      }
+    },
+    {
       "filePath": "/webapp/test/flpSandbox.html",
       "previewMode": 1,
       "dataMode": 1,
@@ -16,24 +34,6 @@
         "id": 5447454,
         "displayName": "Run flpSandbox.html",
         "lastRunTimeStamp": 1613384036235
-      }
-    },
-    {
-      "filePath": "/webapp/Component.js",
-      "previewMode": 1,
-      "dataMode": 1,
-      "workspace": "withoutWorkspace",
-      "ui5ActiveVersion": null,
-      "ui5VerSource": null,
-      "isDefaultVersion": 0,
-      "urlParameters": [],
-      "hashParameter": "",
-      "backendSystem": [],
-      "_metadata": {
-        "runnerId": "fiorirunner",
-        "id": 8964521,
-        "displayName": "Run Component.js",
-        "lastRunTimeStamp": 1613114749496
       }
     }
   ]

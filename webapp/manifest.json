@@ -18,7 +18,8 @@
 				"type": "OData",
 				"settings": {
 					"annotations": [
-						"ZWS_CO_WORKLOADS_CDS_VAN"
+						"ZWS_CO_WORKLOADS_CDS_VAN",
+						"annotation2"
 					],
 					"localUri": "localService/metadata.xml"
 				}
@@ -35,6 +36,13 @@
 				"type": "ODataAnnotation",
 				"settings": {
 					"localUri": "localService/ZWS_CO_WORKLOADS_CDS_VAN.xml"
+				}
+			},
+			"annotation2": {
+				"type": "ODataAnnotation",
+				"uri": "../annotation2.xml",
+				"settings": {
+					"localUri": "../annotation2.xml"
 				}
 			}
 		},

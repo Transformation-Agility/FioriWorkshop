@@ -27,6 +27,11 @@
       "templateId": "ui5template.objectpageextension",
       "templateVersion": "1.0.0",
       "dateTimeStamp": "Thu, 11 Feb 2021 14:14:14 GMT"
+    },
+    {
+      "templateId": "ui5template.listreportextension",
+      "templateVersion": "1.0.0",
+      "dateTimeStamp": "Mon, 15 Feb 2021 10:10:05 GMT"
     }
   ],
   "mockpreview": {

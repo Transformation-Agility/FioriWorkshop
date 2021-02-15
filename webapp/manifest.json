@@ -134,6 +134,16 @@
 							}
 						}
 					}
+				},
+				"sap.ui.controllerExtensions": {
+					"sap.suite.ui.generic.template.ListReport.view.ListReport": {
+						"controllerName": "ZWS_DEMO.ext.controller.ListReportExt",
+						"sap.ui.generic.app": {
+							"ZWS_CO_WORKLOADS": {
+								"EntitySet": "ZWS_CO_WORKLOADS"
+							}
+						}
+					}
 				}
 			}
 		},

@@ -191,5 +191,9 @@
 	},
 	"sap.platform.hcp": {
 		"uri": ""
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/zws_demo/webapp",
+		"_version": "1.1.0"
 	}
 }

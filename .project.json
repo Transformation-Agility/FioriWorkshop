@@ -10,7 +10,8 @@
     "excludedFolders": [
       "test"
     ],
-    "buildRequired": true
+    "buildRequired": false,
+    "lastBuildDateTime": "Mon, 15 Feb 2021 12:06:11 GMT"
   },
   "generation": [
     {
@@ -59,5 +60,9 @@
     "notifyBeforePushLevel": "Error",
     "blockPush": false,
     "blockPushLevel": "Error"
+  },
+  "deploy": {
+    "destination": "Stabilo",
+    "name": "ZWS_DEMO"
   }
 }

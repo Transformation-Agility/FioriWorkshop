@@ -58,8 +58,8 @@ sap.ui.define([
 			//var sWorkPackId = this.getView().byId("inputWorkPack").getValue();
 			var oModel = this.getOwnerComponent().getModel("Comment");
 			var aList = this.getView().byId("listComment").getItems();
-			var oBundle = this.getView().getModel("i18n").getResourceBundle();
-
+			var oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
 			if (!this.sWorkPackId) {
 				var msg = "Please fill Workpack field!";
 				MessageToast.show(msg);

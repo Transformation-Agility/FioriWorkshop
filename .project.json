@@ -10,7 +10,7 @@
     "excludedFolders": [
       "test"
     ],
-    "buildRequired": false,
+    "buildRequired": true,
     "lastBuildDateTime": "Mon, 15 Feb 2021 12:06:11 GMT"
   },
   "generation": [

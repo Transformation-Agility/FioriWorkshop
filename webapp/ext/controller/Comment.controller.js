@@ -11,8 +11,8 @@ sap.ui.define([
 			var oRouter = this.getOwnerComponent().getRouter();
 			var href = window.location.href;
 			var tab = href.split('to_Packs(\'');
-			var tab2 = tab[1].substring(0, 32); //.split('\')');
-			this.sWorkPackId = tab2; //[0];
+			var tab2 = tab[1].substring(0, 32); 
+			this.sWorkPackId = tab2; 
 			this._loadComments(this.sWorkPackId);
 			oRouter.getRoute("ZWS_CO_WORKLOADS/to_Packs").attachMatched(this._onRouteMatched, this);
 		},
@@ -20,9 +20,11 @@ sap.ui.define([
 		_onRouteMatched: function(oEvent) {
 			var href = window.location.href;
 			var tab = href.split('to_Packs(\'');
-			var tab2 = tab[1].substring(0, 32); //.split('\')');
-			this.sWorkPackId = tab2; //[0];
+			var tab2 = tab[1].substring(0, 32); 
+			var oListComment = this.getView().byId("listComment");
+			this.sWorkPackId = tab2; 
 
+			oListComment.removeAllItems();
 			this._loadComments(this.sWorkPackId);
 		},
 

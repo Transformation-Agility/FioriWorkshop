@@ -12,5 +12,5 @@ sap.ui.controller("ZWS_DEMO.ext.controller.ListReportExt", {
 			oSmartFilterBar.setLiveMode(true);
  
 		}
-	},
+	}
 });

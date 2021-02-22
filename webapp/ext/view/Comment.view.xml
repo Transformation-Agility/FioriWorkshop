@@ -2,20 +2,14 @@
 	xmlns:sfi="sap.ui.comp.smartfield" xmlns:sfo="sap.ui.comp.smartform" xmlns:table="sap.ui.table"
 	xmlns:template="http://schemas.sap.com/sapui5/extension/sap.ui.core.template/1" xmlns:uxap="sap.uxap" xmlns="sap.m"
 	controllerName="ZWS_DEMO.ext.controller.Comment">
-	
-			<Panel id="settingsPanel" expandable="true" expanded="true" headerText="{Comment}" width="auto">
-				<content>
-					<!--<HBox>-->
-					<!--	<Input value="005056B7147D1EDABFB002A4A695D316" placeholder="Workpack" id="inputWorkPack" width="100%"/>-->
-					<!--	<Button text="Go" id="btnGo" press="onPressGo"/>-->
-					<!--</HBox>-->
-					<Button text="Save" id="btnSave" press="onPressSave"/>
-					<List noDataText="No comments for now." id="listComment" inset="true" mode="Delete" delete="onDeleteItem"/>
-					<HBox>
-						<Input value="" placeholder="New comment.." id="inputAddComment" liveChange="onLiveChangeAddComment"/>
-						<Button text="Add" id="buttonAddComment" press="onPressAddComment" enabled="false"/>
-					</HBox>
-				</content>
-			</Panel>
-
+	<Panel id="settingsPanel" expandable="true" expanded="true" headerText="{Comment}" width="auto">
+		<content>
+			<Button text="{i18n>btnTxtSave}" id="btnSave" press="onPressSave"/>
+			<List noDataText="{i18n>listNoData}" id="listComment" mode="Delete" delete="onDeleteItem"/>
+			<HBox>
+				<Input value="" placeholder="{i18n>inputPHAdd}" id="inputAddComment" liveChange="onLiveChangeAddComment"/>
+				<Button text="{i18n>btnTxtAdd}" id="buttonAddComment" press="onPressAddComment" enabled="false"/>
+			</HBox>
+		</content>
+	</Panel>
 </core:View>

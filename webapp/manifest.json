@@ -182,6 +182,13 @@
 								"component": {
 									"name": "sap.suite.ui.generic.template.ObjectPage"
 								}
+							},
+							"ObjectPage|to_Procs": {
+								"navigationProperty": "to_Procs",
+								"entitySet": "ZWS_CO_PROCESSES",
+								"component": {
+									"name": "sap.suite.ui.generic.template.ObjectPage"
+								}
 							}
 						}
 					}
